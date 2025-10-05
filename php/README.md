@@ -1,141 +1,217 @@
-<div align="center">
-    <a href="https://php.net">
-        <img
-            alt="PHP"
-            src="https://www.php.net/images/logos/new-php-logo.svg"
-            width="150">
-    </a>
-</div>
+```markdown
+# Hela Capitals Software Engineer Assessment
 
-# The PHP Interpreter
+This repository contains the full solutions for the Hela Capitals Software Engineer internship technical assessment, including **PHP backend** tasks and **React frontend** tasks.
 
-PHP is a popular general-purpose scripting language that is especially suited to
-web development. Fast, flexible and pragmatic, PHP powers everything from your
-blog to the most popular websites in the world. PHP is distributed under the
-[PHP License v3.01](LICENSE).
+---
 
-[![Push](https://github.com/php/php-src/actions/workflows/push.yml/badge.svg)](https://github.com/php/php-src/actions/workflows/push.yml)
-[![Build status](https://travis-ci.com/php/php-src.svg?branch=master)](https://travis-ci.com/github/php/php-src)
-[![Build Status](https://dev.azure.com/phpazuredevops/php/_apis/build/status/php.php-src?branchName=master)](https://dev.azure.com/phpazuredevops/php/_build/latest?definitionId=1&branchName=master)
-[![Fuzzing Status](https://oss-fuzz-build-logs.storage.googleapis.com/badges/php.svg)](https://bugs.chromium.org/p/oss-fuzz/issues/list?sort=-opened&can=1&q=proj:php)
+## Project Structure
 
-## Documentation
+```
 
-The PHP manual is available at [php.net/docs](https://php.net/docs).
+hela-capitals-assessment/
+│
+├── php/                  # PHP backend
+│   ├── tasks.php         # All PHP tasks (Task 1–5)
+│
+├── react/                # React frontend
+│   ├── src/
+│   │   ├── CounterButton.jsx      # Task 1: Counter Button
+│   │   ├── Greeting.jsx #         # Task 2: Conditional Rendering
+│   │   ├── FruitList.jsx          # Task 3: Rendering Lists
+│   │   ├── FormInput.jsx          # Task 4: Handling Input
+│   │   ├── HeaderDisplay.jsx      # Task 5: Props
+│   │   └── App.jsx                # Main app combining tasks
+│   ├── package.json
+│
+└── README.md
 
-## Installation
+````
 
-### Prebuilt packages and binaries
+---
 
-Prebuilt packages and binaries can be used to get up and running fast with PHP.
+## Requirements
 
-For Windows, the PHP binaries can be obtained from
-[windows.php.net](https://windows.php.net). After extracting the archive the
-`*.exe` files are ready to use.
+- **PHP** 7.x or 8.x  
+- **Node.js** 18.x or later  
+- **npm** or **yarn**  
+- **React** 18.x or later  
 
-For other systems, see the [installation chapter](https://php.net/install).
+---
 
-### Building PHP source code
+## PHP Backend Setup
 
-*For Windows, see [Build your own PHP on Windows](https://wiki.php.net/internals/windows/stepbystepbuild_sdk_2).*
+1. Navigate to the `php` folder:
 
-For a minimal PHP build from Git, you will need autoconf, bison, and re2c. For
-a default build, you will additionally need libxml2 and libsqlite3.
+```bash
+cd php
+````
 
-On Ubuntu, you can install these using:
+2. Start the PHP server:
 
-    sudo apt install -y pkg-config build-essential autoconf bison re2c \
-                        libxml2-dev libsqlite3-dev
+```bash
+php -S localhost:8000
+```
 
-On Fedora, you can install these using:
+3. Access the tasks via browser or API client:
 
-    sudo dnf install re2c bison autoconf make libtool ccache libxml2-devel sqlite-devel
+```
+http://localhost:8000/tasks.php
+```
 
-Generate configure:
+This endpoint returns all PHP tasks as a JSON object.
 
-    ./buildconf
+---
 
-Configure your build. `--enable-debug` is recommended for development, see
-`./configure --help` for a full list of options.
+### PHP Tasks Overview
 
-    # For development
-    ./configure --enable-debug
-    # For production
-    ./configure
+**Task 1: PHP Basics**
 
-Build PHP. To speed up the build, specify the maximum number of jobs using `-j`:
+* `== vs ===` comparison
+* `include vs require`
+* `session vs cookie`
 
-    make -j4
+**Task 2: Functions & Loan Calculation**
 
-The number of jobs should usually match the number of available cores, which
-can be determined using `nproc`.
+* `loanRepayment($amount, $interestRate)` function
+* Default interest rate: 10%
+* Examples:
 
-## Testing PHP source code
+  * `loanRepayment(5000)`
+  * `loanRepayment(5000, 15)`
 
-PHP ships with an extensive test suite, the command `make test` is used after
-successful compilation of the sources to run this test suite.
+**Task 3: Arrays & Logic**
 
-It is possible to run tests using multiple cores by setting `-jN` in
-`TEST_PHP_ARGS`:
+* Find highest loan
+* Find lowest loan
+* Calculate average loan
+* Loop to filter loans above 2000
 
-    make TEST_PHP_ARGS=-j4 test
+**Task 4: Database & SQL (PostgreSQL)**
 
-Shall run `make test` with a maximum of 4 concurrent jobs: Generally the maximum
-number of jobs should not exceed the number of cores available.
+* Difference between INNER JOIN and LEFT JOIN
+* SQL to get first loan per client:
 
-The [qa.php.net](https://qa.php.net) site provides more detailed info about
-testing and quality assurance.
+```sql
+SELECT DISTINCT ON (user_id) 
+       user_id, id AS loan_id, amount, status, disbursed_at
+FROM loan_requests
+ORDER BY user_id, disbursed_at ASC;
+```
 
-## Installing PHP built from source
+* SQL to get Gmail users:
 
-After a successful build (and test), PHP may be installed with:
+```sql
+SELECT first_name || ' ' || last_name AS full_name, email
+FROM users
+WHERE email LIKE '%@gmail.com';
+```
 
-    make install
+**Task 5: Date & Applied Logic**
 
-Depending on your permissions and prefix, `make install` may need super user
-permissions.
+* Get today's date: `date("Y-m-d")`
+* Get tomorrow's date: `date("Y-m-d", strtotime("+1 day"))`
+* Check if `$repayment_date` is tomorrow:
 
-## PHP extensions
+```php
+if ($repayment_date === date("Y-m-d", strtotime("+1 day"))) {
+    echo "Repayment is tomorrow.";
+}
+```
 
-Extensions provide additional functionality on top of PHP. PHP consists of many
-essential bundled extensions. Additional extensions can be found in the PHP
-Extension Community Library - [PECL](https://pecl.php.net).
+---
 
-## Contributing
+## React Frontend Setup
 
-The PHP source code is located in the Git repository at
-[github.com/php/php-src](https://github.com/php/php-src). Contributions are most
-welcome by forking the repository and sending a pull request.
+1. Navigate to the `react` folder:
 
-Discussions are done on GitHub, but depending on the topic can also be relayed
-to the official PHP developer mailing list internals@lists.php.net.
+```bash
+cd react
+```
 
-New features require an RFC and must be accepted by the developers. See
-[Request for comments - RFC](https://wiki.php.net/rfc) and
-[Voting on PHP features](https://wiki.php.net/rfc/voting) for more information
-on the process.
+2. Install dependencies:
 
-Bug fixes don't require an RFC. If the bug has a GitHub issue, reference it in
-the commit message using `GH-NNNNNN`. Use `#NNNNNN` for tickets in the old
-[bugs.php.net](https://bugs.php.net) bug tracker.
+```bash
+npm install
+```
 
-    Fix GH-7815: php_uname doesn't recognise latest Windows versions
-    Fix #55371: get_magic_quotes_gpc() throws deprecation warning
+or
 
-See [Git workflow](https://wiki.php.net/vcs/gitworkflow) for details on how pull
-requests are merged.
+```bash
+yarn
+```
 
-### Guidelines for contributors
+3. Start the development server:
 
-See further documents in the repository for more information on how to
-contribute:
+```bash
+npm run dev
+```
 
-- [Contributing to PHP](/CONTRIBUTING.md)
-- [PHP coding standards](/CODING_STANDARDS.md)
-- [Mailing list rules](/docs/mailinglist-rules.md)
-- [PHP release process](/docs/release-process.md)
+4. Open your browser at:
 
-## Credits
+```
+http://localhost:5173
+```
 
-For the list of people who've put work into PHP, please see the
-[PHP credits page](https://php.net/credits.php).
+---
+
+### React Tasks Overview
+
+**Task 1: Counter Button**
+
+* Functional component displaying a count starting at 0
+* Increment count by 1 on button click
+
+**Task 2: Conditional Rendering**
+
+* Display "Hello, Guest!" if not logged in
+* Display "Welcome, [username]!" if logged in
+
+**Task 3: Rendering Lists**
+
+* Given array: `["Apple", "Banana", "Mango", "Orange"]`
+* Render each item as an `<li>` inside a `<ul>`
+
+**Task 4: Handling Input (Forms)**
+
+* Input field to type a name
+* Button displays greeting: "Hello, [name]!"
+
+**Task 5: Props (Passing Data)**
+
+* Parent component passes `title` prop
+* Header component displays the title in an `<h1>` tag
+
+**Tasks**
+* Fetches PHP backend tasks and displays them in the React app
+
+---
+
+## Submission
+
+Compress the entire folder (`hela-capitals-assessment/`) into a ZIP file and submit to:
+
+**Email:** [hr@helacapitals.com](mailto:hr@helacapitals.com)
+
+---
+
+## Contact
+
+For any questions regarding this project, email: **[sheri.ngugi17@gmail.com](mailto:sheri.ngugi17@gmail.com)**
+
+---
+
+## Notes
+
+* Ensure CORS is enabled in PHP backend:
+
+```php
+header('Access-Control-Allow-Origin: *');
+```
+
+* React frontend expects the backend API at: `http://localhost:8000/tasks.php`
+
+
+```
+
+---
