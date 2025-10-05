@@ -7,28 +7,23 @@ This repository contains the full solutions for the Hela Capitals Software Engin
 
 ## Project Structure
 
-```
-
+```plaintext
 hela-capitals-assessment/
 │
 ├── php/                  # PHP backend
-│   ├── tasks.php         # All PHP tasks (Task 1–5)
+│   └── tasks.php         # All PHP tasks (Task 1–5)
 │
 ├── react/                # React frontend
 │   ├── src/
 │   │   ├── CounterButton.jsx      # Task 1: Counter Button
-│   │   ├── Greeting.jsx #         # Task 2: Conditional Rendering
-│   │   ├── FruitList.jsx          # Task 3: Rendering Lists
-│   │   ├── FormInput.jsx          # Task 4: Handling Input
-│   │   ├── HeaderDisplay.jsx      # Task 5: Props
-│   │   └── App.jsx                # Main app combining tasks
+│   │   ├── Greeting.jsx            # Task 2: Conditional Rendering
+│   │   ├── FruitList.jsx           # Task 3: Rendering Lists
+│   │   ├── FormInput.jsx           # Task 4: Handling Input
+│   │   ├── HeaderDisplay.jsx       # Task 5: Props
+│   │   └── App.jsx                 # Main app combining tasks
 │   ├── package.json
 │
 └── README.md
-
-````
-
----
 
 ## Requirements
 
@@ -215,3 +210,4 @@ header('Access-Control-Allow-Origin: *');
 ```
 
 ---
+
