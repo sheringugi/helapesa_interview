@@ -1,0 +1,127 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0;             /* removed top padding */
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+.content-below-navbar {
+    margin-top: 100px; /* same as navbar height */
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.form-input {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+
+.read-the-docs {
+  color: #888;
+}
+
+a {
+    text-decoration: none;
+    color: #007bff;
+    font-size: 20px;
+}
+
+li {
+    list-style: none !important;
+}
+
+.access-navbar {
+  display: flex;
+  justify-content: space-between; /* title left, links right */
+  align-items: center;
+  background-color: white;        /* solid background so links are readable */
+  padding: 10px 20px;
+  border-bottom: 1px solid #e2dbdb;
+  height: 80px;
+
+  position: fixed;  /* stick to top */
+  top: 0;
+  left: 0;
+  width: 100%;      /* fill top of page */
+  z-index: 100;
+  box-sizing: border-box;
+}
+
+/* Title on the left */
+.access-navbar-left {
+  font-size: 32px;
+  font-weight: bold;
+  margin: 0;
+}
+
+/* Navbar links on the right */
+.access-navbar-right {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.access-navbar-right li {
+  margin-left: 15px;
+  margin-right: 30px;
+}
+
+.access-navbar-right li a {
+  text-decoration: none;
+  color: #007bff;
+  font-size: 20px;
+  padding: 10px;
+  font-weight: 600;
+}
+
+/* Push main content below fixed navbar */
+.content-below-navbar {
+  margin-top: 100px; /* same as navbar height */
+}
+
+/* Keep the global styles, just add this */
+div > section {
+  text-align: left; /* left-align text inside all sections */
+  margin: 1em 0;    /* optional spacing between sections */
+}
+.tasks-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2em; /* space between tasks */
+  padding: 1em;
+}
